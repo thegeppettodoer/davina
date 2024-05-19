@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+
+    <title>Christine Davina BabyShower 1Junio2024</title>
+    <style>
+        body {
+            position: relative;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgb(255, 253, 254);
+            background: linear-gradient(180deg, rgba(255, 253, 254, 1) 0%, rgba(255, 253, 254, 1) 38%, rgba(246, 215, 203, 1) 57%);
+            /* Gradiente de colores */
+        }
+
+        .sect {
+            width: 100%;
+            min-height: 500px;
+            position: relative;
+        }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: calc(40% - 1px);
+            /*  --Ancho del dispositivo móvil menos 5px */
+            height: auto;
+            z-index: -2;
+        }
+
+        @media (min-width: 769px) {
+            video {
+                max-width: 500px;
+                /* Ancho máximo de 400px para pantallas de escritorio */
+                height: auto;
+            }
+        }
+
+        h1,
+        h2 {
+            margin: 0;
+            padding-top: 3rem;
+            padding-left: 2rem;
+        }
+
+        /* Estilo para el enlace */
+        a {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: transparent;
+            /* Color transparente */
+            text-decoration: none;
+            z-index: 1;
+            /* Asegura que el enlace esté encima del video */
+        }
+
+
+
+
+
+
+
+
+        /* Estilos para la imagen del cometa */
+        .comet {
+            width: 21px;
+            height: auto;
+            /* Para mantener la proporción de aspecto */
+            position: absolute;
+            animation: cometAnimation 6s ease infinite;
+            /* Duración de la animación y repetición infinita */
+            z-index: 999;
+            /* Asegura que el cometa esté en la parte superior */
+        }
+
+        /* Animación de brillo */
+        @keyframes cometAnimation {
+            0% {
+                opacity: 0.7;
+                /* Brillo inicial */
+            }
+
+            50% {
+                opacity: 1;
+                /* Brillo máximo */
+            }
+
+            100% {
+                opacity: 0.7;
+                /* Brillo final */
+            }
+        }
+
+        /* Animación de movimiento horizontal */
+        @keyframes cometMoveX {
+            0% {
+                left: -21px;
+                /* Posición inicial izquierda */
+                transform: rotate(0deg);
+                /* Rotación inicial */
+            }
+
+            100% {
+                left: calc(100vw + 21px);
+                /* Posición final derecha */
+                transform: rotate(360deg);
+                /* Rotación completa */
+            }
+        }
+
+        /* Animación de movimiento vertical */
+        @keyframes cometMoveY {
+            0% {
+                top: -100px;
+                /* Posición inicial arriba */
+                transform: rotate(0deg);
+                /* Rotación inicial */
+            }
+
+            100% {
+                top: calc(100vh + 100px);
+                /* Posición final abajo */
+                transform: rotate(360deg);
+                /* Rotación completa */
+            }
+        }
+
+        /* Estilo para el movimiento horizontal */
+        .comet.random-x {
+            animation-name: cometMoveX;
+        }
+
+        /* Estilo para el movimiento vertical */
+        .comet.random-y {
+            animation-name: cometMoveY;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="comet random-x" id="comet1">
+        <img src="mune1.png" width="153px" alt="Cometa animado">
+    </div>
+
+    <!-- <section id="sect1" class="sect"> -->
+    <a href="https://meet.google.com/mmc-wrhv-tyj" target="_blank"> <!-- Enlace transparente sobre el video -->
+        <!-- <video src="./ChristineDavinaJunio2024.mp4" autoplay muted="false" loop></video> -->
+
+        <!-- Elemento de video -->
+        <video id="background-video" autoplay loop muted>
+            <source src="./ChristineDavinaJunio2024.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+
+        <!-- Elemento de audio -->
+        <audio id="background-audio" autoplay>
+            <source src="Buenas_Noches_Del_Bebe_-01.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </a>
+    <!-- </section> -->
+
+
+
+
+    <script>
+        var audio = document.createElement("AUDIO")
+        document.body.appendChild(audio);
+        audio.src = "Buenas_Noches_Del_Bebe_-01.mp3"
+
+        document.body.addEventListener("mousemove", function () {
+            audio.play()
+        })
+        document.addEventListener('DOMContentLoaded', function () {
+            // Función para establecer la posición inicial aleatoria dentro de los límites de la pantalla
+            function establecerPosicionInicial(cometId) {
+                var cometa = document.getElementById(cometId);
+                if (cometa) {
+                    cometa.style.display = 'block';
+                    var screenWidth = window.innerWidth;
+                    var topMin = 1; // Top mínimo
+                    var topMax = 200; // Top máximo
+                    var randomX = Math.round((Math.random() * (screenWidth - cometa.offsetWidth)) / 100) * 100;
+                    var randomY = Math.random() < topMax ? Math.random() : 50 * (topMax - topMin) + topMin;
+                    cometa.style.left = randomX + 'px';
+                    cometa.style.top = randomY + 'px';
+                    console.log(cometId, randomX, randomY);
+
+                } else {
+                    console.error('El elemento con ID ' + cometId + ' no se encontró.');
+                }
+            }
+
+            // Llamar a la función para el cometa
+            establecerPosicionInicial('comet1');
+
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
